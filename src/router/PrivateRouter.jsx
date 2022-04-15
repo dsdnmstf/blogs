@@ -1,9 +1,9 @@
-import { Navigate, Outlet } from "react-router-dom"
+import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRouter = () => {
-  return (
-    <div>PrivateRouter</div>
-  )
-}
+  const currentUser = useSelector((state) => state.firebase.currentUser);
+  return currentUser ? <Outlet /> : <Navigate to="/login" />;
+};
 
-export default PrivateRouter
+export default PrivateRouter;

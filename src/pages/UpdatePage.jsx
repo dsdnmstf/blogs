@@ -1,41 +1,50 @@
-import {
-  Box,
-  Container,
-  Grid,
-  TextField,
-  Typography,
-  Button,
-} from "@mui/material";
-import { useState } from "react";
+import { Box, Container, Grid, TextField, Button } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Image from "../assets/blok.7e6674a5.png";
-import { NewBlog } from "../components/Headers";
-import { writeBlogData } from "../firebase/firebase";
+import { UpdateBlog } from "../components/Headers";
+import { getDataForDetail, updateData } from "../firebase/firebase";
 import { succesNote } from "../toastify/Toastify";
 
-const NewBlogPage = () => {
-  const navigate = useNavigate();
+const UpdatePage = () => {
   const currentUser = useSelector((state) => state.firebase.currentUser);
-  const [formInfo, setFormInfo] = useState({
-    title: "",
-    Image_url: "",
-    content: "",
-    user: currentUser.email,
-    id: "",
-  });
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [updateBlog, setUpdateBlog] = useState([
+    {
+      title: "",
+      Image_url: "",
+      content: "",
+      user: currentUser.email,
+      id: id,
+    },
+  ]);
+
+  useEffect(() => {
+    getDataForDetail(id, setUpdateBlog);
+  }, [id]);
+
+  //   const [formInfo, setFormInfo] = useState({
+  //     title: "",
+  //     Image_url: "",
+  //     content: "",
+  //     user: currentUser.email,
+  //     id: Date.now(),
+  //   });
 
   const handleFormInfo = (e) => {
     const { id, value } = e.target;
-    setFormInfo({ ...formInfo, [id]: value });
+    setUpdateBlog({ ...updateBlog, [id]: value });
   };
 
   const handleSubmit = (e) => {
+    const { title, Image_url, content, user, id } = updateBlog;
     e.preventDefault();
-    const id = Date.now();
-    writeBlogData({ ...formInfo, id: id });
+    // const id = Date.now();
+    updateData(title, Image_url, content, user, id);
     navigate("/");
-    succesNote("Blog succesfully  added");
+    succesNote("Blog updated");
   };
   return (
     <div>
@@ -55,14 +64,15 @@ const NewBlogPage = () => {
           alt="The house from the offer."
           src={Image}
         />
-        <NewBlog />
+        <UpdateBlog />
 
         <Box component="form" onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
                 onChange={handleFormInfo}
-                value={formInfo.title}
+                // defaultValue={updateBlog.title}
+                value={updateBlog.title}
                 id="title"
                 label="Title"
                 type="text"
@@ -73,7 +83,8 @@ const NewBlogPage = () => {
             <Grid item xs={12}>
               <TextField
                 onChange={handleFormInfo}
-                value={formInfo.Image_url}
+                // defaultValue={updateBlog.Image_url}
+                value={updateBlog.Image_url}
                 id="Image_url"
                 label="Image URL"
                 type="url"
@@ -83,7 +94,8 @@ const NewBlogPage = () => {
             <Grid item xs={12}>
               <TextField
                 onChange={handleFormInfo}
-                value={formInfo.content}
+                // defaultValue={updateBlog.content}
+                value={updateBlog.content}
                 id="content"
                 label="Content"
                 type="text"
@@ -109,4 +121,4 @@ const NewBlogPage = () => {
   );
 };
 
-export default NewBlogPage;
+export default UpdatePage;

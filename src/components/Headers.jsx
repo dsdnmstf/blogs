@@ -62,7 +62,6 @@ export const Login = () => {
   );
 };
 
-
 export const Register = () => {
   return (
     <Box
@@ -94,7 +93,6 @@ export const Register = () => {
   );
 };
 
-
 export const NewBlog = () => {
   return (
     <Box
@@ -114,6 +112,73 @@ export const NewBlog = () => {
       />
       <Typography variant="h5" component="h2" color="rgb(4, 101, 130)">
         New Blog
+      </Typography>
+      <Box
+        sx={{
+          width: "3rem",
+          height: "0.15rem",
+          backgroundColor: "rgb(4, 101, 130)",
+        }}
+      />
+    </Box>
+  );
+};
+
+export const ClaruswayBlog = () => {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        m: "3rem",
+      }}
+    >
+      <Box
+        sx={{
+          width: "3rem",
+          height: "0.15rem",
+          backgroundColor: "white",
+        }}
+      />
+      <Typography
+        variant="h5"
+        component="h2"
+        sx={{ color: "rgb(245, 222, 179)" }}
+      >
+        {"<Clarusway/>"}
+        <span style={{ color: "white" }}>Blog</span>
+      </Typography>
+      <Box
+        sx={{
+          width: "3rem",
+          height: "0.15rem",
+          backgroundColor: "white",
+        }}
+      />
+    </Box>
+  );
+};
+
+export const UpdateBlog = () => {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        m: "3rem",
+      }}
+    >
+      <Box
+        sx={{
+          width: "3rem",
+          height: "0.15rem",
+          backgroundColor: "rgb(4, 101, 130)",
+        }}
+      />
+      <Typography variant="h5" component="h2" color="rgb(4, 101, 130)">
+        Update Blog
       </Typography>
       <Box
         sx={{

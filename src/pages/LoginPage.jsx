@@ -1,15 +1,48 @@
-import React from 'react'
-import { Login } from '../components/Headers'
-import MenuAppBar from '../components/MenuAppbar'
-import { Container, Box,  Typography, Grid, TextField, Button } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Login } from "../components/Headers";
+import {
+  Container,
+  Box,
+  Typography,
+  Grid,
+  TextField,
+  Button,
+} from "@mui/material";
 import Image from "../assets/blok.7e6674a5.png";
-
-
+import { loginWithEmail, loginWithGoogle } from "../firebase/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { succesNote } from "../toastify/Toastify";
 
 const LoginPage = () => {
+  const currentUser = useSelector((state) => state.firebase.currentUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const successNavigate = () => {
+    navigate("/");
+    succesNote("Login succesfully performed");
+  };
+  const [formdata, setFormdata] = useState({
+    email: "",
+    password: "",
+  });
+  useEffect(() => {
+    currentUser && successNavigate();
+  }, [currentUser, navigate]);
+
+  const handleChange = (e) => {
+    setFormdata({ ...formdata, [e.target.name]: e.target.value });
+  };
+  // const { name, value } = e.target;
+
+  const handleGoogleLogin = () => {
+    loginWithGoogle(dispatch);
+  };
+  const handleLogin = async () => {
+    await loginWithEmail(formdata.email, formdata.password, dispatch);
+  };
   return (
     <div>
-      <MenuAppBar />
       <Login />
       <Container
         maxWidth="xs"
@@ -21,14 +54,12 @@ const LoginPage = () => {
           gap: "2rem",
         }}
       >
-        
-          <Box
-            component="img"
-            sx={{ mt: "2rem" }}
-            alt="The house from the offer."
-            src={Image}
-          />
-        
+        <Box
+          component="img"
+          sx={{ mt: "2rem" }}
+          alt="The house from the offer."
+          src={Image}
+        />
 
         <Typography variant="h3" component="h3">
           Login
@@ -38,9 +69,12 @@ const LoginPage = () => {
             <Grid item xs={12}>
               <TextField
                 id="Email"
+                name="email"
                 label="Email"
                 type="email"
+                value={formdata.email}
                 autoComplete="current-password"
+                onChange={handleChange}
                 fullWidth
               />
             </Grid>
@@ -49,18 +83,31 @@ const LoginPage = () => {
                 id="outlined-password-input"
                 label="Password"
                 type="password"
+                name="password"
+                onChange={handleChange}
+                value={formdata.password}
                 autoComplete="current-password"
                 fullWidth
               />
             </Grid>
           </Grid>
           <Grid item xs={12} sx={{ mt: "15px" }}>
-            <Button type="submit" variant="contained" fullWidth>
+            <Button
+              onClick={handleLogin}
+              type="submit"
+              variant="contained"
+              fullWidth
+            >
               LOGIN
             </Button>
           </Grid>
           <Grid item xs={12} sx={{ mt: "15px" }}>
-            <Button type="submit" variant="contained" fullWidth>
+            <Button
+              onClick={handleGoogleLogin}
+              type="submit"
+              variant="contained"
+              fullWidth
+            >
               Continou with Google
             </Button>
           </Grid>
@@ -68,6 +115,6 @@ const LoginPage = () => {
       </Container>
     </div>
   );
-}
+};
 
-export default LoginPage
+export default LoginPage;

@@ -4,15 +4,18 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import Image from "../assets/cw.041cf5e8.jpeg"
+import Image from "../assets/cw.041cf5e8.jpeg";
+import { useSelector } from "react-redux";
+import { logOut } from "../firebase/firebase";
+import { useNavigate } from "react-router-dom";
+import { Avatar } from "@mui/material";
+import { ClaruswayBlog } from "./Headers";
 export default function MenuAppBar() {
+  const currentUser = useSelector((state) => state.firebase.currentUser);
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -20,9 +23,8 @@ export default function MenuAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   return (
-    <Box  sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -31,17 +33,17 @@ export default function MenuAppBar() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            
+            onClick={() => navigate("/")}
           >
             <Box
               component="img"
-              sx={{width:"40px"}}
+              sx={{ width: "40px" }}
               alt="The house from the offer."
               src={Image}
             />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            CLARUSWAY
+            <ClaruswayBlog />
           </Typography>
 
           <div>
@@ -53,7 +55,11 @@ export default function MenuAppBar() {
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+              {currentUser ? (
+                <Avatar>{currentUser.displayName}</Avatar>
+              ) : (
+                <AccountCircle />
+              )}
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -68,10 +74,56 @@ export default function MenuAppBar() {
                 horizontal: "right",
               }}
               open={Boolean(anchorEl)}
-            //   onClose={handleClose}
+              onClose={handleClose}
             >
-              <MenuItem >Profile</MenuItem>
-              <MenuItem >My account</MenuItem>
+              {currentUser ? (
+                <div>
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/profile");
+                      handleClose();
+                    }}
+                  >
+                    Profile
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/newblog");
+                      handleClose();
+                    }}
+                  >
+                    New Blog
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      logOut();
+                      navigate("/");
+                      handleClose();
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
+                </div>
+              ) : (
+                <div>
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/login");
+                      handleClose();
+                    }}
+                  >
+                    Login
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/register");
+                      handleClose();
+                    }}
+                  >
+                    Register
+                  </MenuItem>
+                </div>
+              )}
             </Menu>
           </div>
         </Toolbar>

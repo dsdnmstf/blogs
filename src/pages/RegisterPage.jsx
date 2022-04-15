@@ -1,66 +1,55 @@
 import React from "react";
 import { Formik } from "formik";
 import { Register } from "../components/Headers";
-import MenuAppBar from "../components/MenuAppbar";
 import Image from "../assets/blok.7e6674a5.png";
 import { Avatar, Box, Container, Link, Typography } from "@mui/material";
 import RegisterForm from "../components/RegisterForm";
 import { RegisterValidationSchema } from "../components/RegisterFormValidation";
 const RegisterPage = () => {
   return (
-    <div>
-      <MenuAppBar />
-
-      <Container maxWidth="sm">
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          marginTop: "2rem",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Box
-          sx={{
-            marginTop: "2rem",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          {/* <Avatar sx={{ width:"300px", height:"300px" }}> */}
-          <Box
-            component="img"
-            sx={{ mt: "2rem" }}
-            alt="The house from the offer."
-            src={Image}
-          />
-          {/* </Avatar> */}
-          <Register />
+          component="img"
+          sx={{ mt: "2rem" }}
+          alt="The house from the offer."
+          src={Image}
+        />
 
-          <Formik
-            initialValues={{
-              email: "",
-              password: "",
-              passwordConfirm: "",
-            }}
-            validationSchema={RegisterValidationSchema}
-            onSubmit={(values, actions) => {
-              alert(`firstName: ${values.firstName}
+        <Register />
+
+        <Formik
+          initialValues={{
+            email: "",
+            password: "",
+            passwordConfirm: "",
+          }}
+          validationSchema={RegisterValidationSchema}
+          onSubmit={(values, actions) => {
+            alert(`firstName: ${values.firstName}
             lastName: ${values.lastName}
              email: ${values.email}
              password: ${values.password}
             `);
-              actions.resetForm();
-              actions.setSubmitting(false);
-            }}
-            component={(props) => <RegisterForm {...props} />}
-          ></Formik>
+            actions.resetForm();
+            actions.setSubmitting(false);
+          }}
+          component={(props) => <RegisterForm {...props} />}
+        ></Formik>
 
-          <Typography
-            color="gray"
-            align="center"
-            variant="body2"
-            sx={{ mt: 4 }}
-          >
-            Copyright ©<Link href="#"> Mustafa</Link>
-            {new Date().getFullYear()}
-          </Typography>
-        </Box>
-      </Container>
-    </div>
+        <Typography color="gray" align="center" variant="body2" sx={{ mt: 4 }}>
+          Copyright ©<Link href="#"> Mustafa</Link>
+          {new Date().getFullYear()}
+        </Typography>
+      </Box>
+    </Container>
   );
 };
 

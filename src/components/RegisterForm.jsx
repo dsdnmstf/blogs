@@ -1,13 +1,22 @@
-import {Form} from "formik"
+import { Form } from "formik";
 import { Grid, TextField, Button, Link } from "@mui/material";
+import { createUser } from "../firebase/firebase";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const RegisterForm = (props) => {
-     console.log(props);
-     const { values, handleChange, handleBlur, errors, touched } = props;
+  // const [formdata, setFormdata] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+  const navigate = useNavigate();
+  const { values, handleChange, handleBlur, errors, touched } = props;
+  const handleRegister = () => {
+    createUser(values.email, values.password);
+    navigate("/");
+  };
   return (
     <Form>
       <Grid container spacing={4}>
-        
-        
         <Grid item xs={12}>
           <TextField
             id="email"
@@ -60,15 +69,14 @@ const RegisterForm = (props) => {
             type="submit"
             variant="contained"
             fullWidth
-            sx={{ }}
+            onClick={handleRegister}
           >
             Register
           </Button>
         </Grid>
       </Grid>
-      
     </Form>
   );
-}
+};
 
-export default RegisterForm
+export default RegisterForm;
