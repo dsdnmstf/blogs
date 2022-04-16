@@ -7,7 +7,7 @@ export const Dashboard = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        mt: "3rem",
+        m: "3rem",
       }}
     >
       <Box
@@ -128,10 +128,9 @@ export const ClaruswayBlog = () => {
   return (
     <Box
       sx={{
-        display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        m: "3rem",
+        display: { xs: "none", sm: "flex" },
       }}
     >
       <Box

@@ -9,7 +9,14 @@ import NewBlogPage from "../pages/NewBlogPage";
 import RegisterPage from "../pages/RegisterPage";
 import Home from "../pages/Home";
 import UpdatePage from "../pages/UpdatePage";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { userStateChecker } from "../firebase/firebase";
 const AppRouter = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    userStateChecker(dispatch);
+  }, []);
   return (
     <BrowserRouter>
       <MenuAppBar />

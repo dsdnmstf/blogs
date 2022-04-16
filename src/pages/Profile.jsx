@@ -1,13 +1,9 @@
-import {
-  Avatar,
-  Card,
-  CardContent,
-  Container,
-  Typography,
-} from "@mui/material";
+import { Avatar, Card, Container, Typography } from "@mui/material";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const currentUser = useSelector((state) => state.firebase.currentUser);
   return (
     <Container
       maxWidth="md"
@@ -37,9 +33,9 @@ const Profile = () => {
           B
         </Avatar>
         <Typography>Display Name</Typography>
-        <Typography>MF</Typography>
+        <Typography>{currentUser.displayName}</Typography>
         <Typography>Email</Typography>
-        <Typography>dsdnmstf@gmail.com</Typography>
+        <Typography>currentUser.email</Typography>
       </Card>
     </Container>
   );

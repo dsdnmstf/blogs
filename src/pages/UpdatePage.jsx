@@ -72,7 +72,7 @@ const UpdatePage = () => {
               <TextField
                 onChange={handleFormInfo}
                 // defaultValue={updateBlog.title}
-                value={updateBlog.title}
+                value={updateBlog?.title ?? ""}
                 id="title"
                 label="Title"
                 type="text"
@@ -84,7 +84,7 @@ const UpdatePage = () => {
               <TextField
                 onChange={handleFormInfo}
                 // defaultValue={updateBlog.Image_url}
-                value={updateBlog.Image_url}
+                value={updateBlog?.Image_url ?? ""}
                 id="Image_url"
                 label="Image URL"
                 type="url"
@@ -95,7 +95,7 @@ const UpdatePage = () => {
               <TextField
                 onChange={handleFormInfo}
                 // defaultValue={updateBlog.content}
-                value={updateBlog.content}
+                value={updateBlog?.content ?? ""}
                 id="content"
                 label="Content"
                 type="text"
@@ -105,12 +105,7 @@ const UpdatePage = () => {
               />
             </Grid>
             <Grid item xs={12} sx={{ mt: "15px" }}>
-              <Button
-                type="submit"
-                variant="contained"
-                // onClick={handleSubmit}
-                fullWidth
-              >
+              <Button type="submit" variant="contained" fullWidth>
                 SUBMIT
               </Button>
             </Grid>

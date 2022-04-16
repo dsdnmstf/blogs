@@ -1,9 +1,9 @@
 import { createStore, combineReducers } from "redux";
 import firebaseReducers from "./reducers/firebaseReducers";
-import setBlogReducers from "./reducers/setBlogReducers";
+import countReducers from "./reducers/likeReducers";
 const allReducers = combineReducers({
   firebase: firebaseReducers,
-  setBlogs: setBlogReducers,
+  count: countReducers,
 });
 
 export const combinedStore = () => {

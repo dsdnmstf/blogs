@@ -27,6 +27,7 @@ import {
   setCurrentUserTrue,
 } from "../redux/actions/firebasActions";
 import { failedNote } from "../toastify/Toastify";
+import { Navigate } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCAwqtxXzg2THhpQBrc252xmqI4by4-1nc",
@@ -40,7 +41,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-export const writeBlogData = ({ title, Image_url, content, user, id }) => {
+export const writeBlogData = ({
+  title,
+  Image_url,
+  content,
+  user,
+  id,
+  like,
+}) => {
   const db = getDatabase();
   set(ref(db, "blogs/" + id), {
     title: title,
@@ -48,6 +56,7 @@ export const writeBlogData = ({ title, Image_url, content, user, id }) => {
     content: content,
     user: user,
     id: id,
+    like: like,
   });
 };
 
@@ -111,7 +120,6 @@ export const userStateChecker = (dispatch) => {
   onAuthStateChanged(auth, (currentUser) => {
     if (currentUser) {
       dispatch(setCurrentUserTrue(currentUser));
-      console.log(currentUser);
     } else {
       dispatch(setCurrentUserFalse());
     }

@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  Grid,
-  TextField,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Box, Container, Grid, TextField, Button } from "@mui/material";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +16,7 @@ const NewBlogPage = () => {
     content: "",
     user: currentUser.email,
     id: "",
+    like: { count: 0, users: [], isLike: false },
   });
 
   const handleFormInfo = (e) => {
@@ -93,12 +87,7 @@ const NewBlogPage = () => {
               />
             </Grid>
             <Grid item xs={12} sx={{ mt: "15px" }}>
-              <Button
-                type="submit"
-                variant="contained"
-                // onClick={handleSubmit}
-                fullWidth
-              >
+              <Button type="submit" variant="contained" fullWidth>
                 SUBMIT
               </Button>
             </Grid>

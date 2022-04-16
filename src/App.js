@@ -4,11 +4,22 @@ import { combinedStore } from "./redux";
 import AppRouter from "./router/AppRouter";
 function App() {
   const store = combinedStore();
-  console.log(store);
+
   return (
     <Provider store={store}>
       <AppRouter />
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </Provider>
   );
 }

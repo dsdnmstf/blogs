@@ -10,11 +10,13 @@ import {
 } from "@mui/material";
 import Image from "../assets/blok.7e6674a5.png";
 import { loginWithEmail, loginWithGoogle } from "../firebase/firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { succesNote } from "../toastify/Toastify";
+import { failedNote, succesNote } from "../toastify/Toastify";
 
 const LoginPage = () => {
+  const { state } = useLocation();
+  console.log(state);
   const currentUser = useSelector((state) => state.firebase.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,6 +28,9 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
+  useEffect(() => {
+    state && failedNote("Please sign in!");
+  }, []);
   useEffect(() => {
     currentUser && successNavigate();
   }, [currentUser, navigate]);
