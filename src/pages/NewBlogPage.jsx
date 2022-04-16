@@ -16,7 +16,7 @@ const NewBlogPage = () => {
     content: "",
     user: currentUser.email,
     id: "",
-    like: { count: 0, users: [], isLike: false },
+    like: { count: 0, likeUsers: [""], isLike: false },
   });
 
   const handleFormInfo = (e) => {

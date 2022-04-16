@@ -15,7 +15,7 @@ const Profile = () => {
       }}
     >
       <Card
-        maxWidth="md"
+        maxwidth="md"
         sx={{
           display: "flex",
           justifyContent: "center",

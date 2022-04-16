@@ -64,13 +64,13 @@ export const getDataFromFirebase = (setBlogs) => {
   const db = getDatabase(app);
   const starCountRef = ref(db, "blogs/");
   onValue(starCountRef, (snapshot) => {
-    const blogs = snapshot.val();
+    const blogs = snapshot.val() ? snapshot.val() : [];
     const blogsArray = Object.values(blogs);
     setBlogs(blogsArray);
   });
 };
 
-export const updateData = (title, Image_url, content, user, id) => {
+export const updateData = (title, Image_url, content, user, id, like) => {
   const db = getDatabase();
   // A post entry.
   const postData = {
@@ -79,6 +79,7 @@ export const updateData = (title, Image_url, content, user, id) => {
     content: content,
     user: user,
     id: id,
+    like: like,
   };
   // const newPostKey = push(child(ref(db), "blogs")).key;
   const updates = {};

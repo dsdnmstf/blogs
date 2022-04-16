@@ -9,12 +9,13 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { updateData } from "../firebase/firebase";
 
-const Blog = ({ Image_url, content, title, user, id }) => {
+const Blog = ({ Image_url, content, title, user, id, like }) => {
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.firebase.currentUser);
   const date = new Date();
@@ -25,28 +26,42 @@ const Blog = ({ Image_url, content, title, user, id }) => {
     " ",
     date.getFullYear(),
   ];
-  // const monts = [
-  //   "January",
-  //   "February",
-  //   "March",
-  //   "April",
-  //   "May",
-  //   "June",
-  //   "July",
-  //   "August",
-  //   "September",
-  //   "October",
-  //   "November",
-  //   "December",
-  // ];
+  console.log(currentUser.email, user, id);
+  console.log(like);
+  const handleLike = () => {
+    if (
+      (currentUser.email !== user) &
+      !like.likeUsers.includes(currentUser.email)
+    ) {
+      like.count = like.count + 1;
+      like.isLike = !like.isLike;
+      like.likeUsers.push(currentUser.email);
+      updateData(title, Image_url, content, user, id, like);
+    } else if (
+      (currentUser.email !== user) &
+      like.likeUsers.includes(currentUser.email)
+    ) {
+      like.count = like.count - 1;
+      like.isLike = !like.isLike;
+      let value = currentUser.email;
+      like.likeUsers = like.likeUsers.filter((item) => item !== value);
+      updateData(title, Image_url, content, user, id, like);
+    } else {
+      alert("You cann not like your blog");
+    }
+  };
 
   return (
-    <Card
-      sx={{ maxWidth: 345, margin: "1rem" }}
-      onClick={() => navigate(`/blogdetail/${id}`)}
-    >
-      <CardMedia component="img" height="194" image={Image_url} alt={title} />
+    <Card sx={{ maxWidth: 345, margin: "1rem" }}>
+      <CardMedia
+        component="img"
+        height="194"
+        image={Image_url}
+        alt={title}
+        onClick={() => navigate(`/blogdetail/${id}`)}
+      />
       <Box
+        onClick={() => navigate(`/blogdetail/${id}`)}
         sx={{
           bgcolor: "lightgray",
           display: "column",
@@ -92,10 +107,17 @@ const Blog = ({ Image_url, content, title, user, id }) => {
       </CardContent>
 
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton
+          aria-label="add to favorites"
+          onClick={handleLike}
+          sx={{
+            color:
+              (currentUser.email !== user) & (like.isLike == true) && "red",
+          }}
+        >
           <FavoriteIcon />
         </IconButton>
-        <span>0</span>
+        <span>{like.count}</span>
         <IconButton aria-label="share">
           <ModeCommentOutlinedIcon />
         </IconButton>
