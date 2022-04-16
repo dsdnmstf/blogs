@@ -48,7 +48,6 @@ const LoginPage = () => {
   };
   return (
     <div>
-      <Login />
       <Container
         maxWidth="xs"
         sx={{
@@ -65,10 +64,8 @@ const LoginPage = () => {
           alt="The house from the offer."
           src={Image}
         />
+        <Login />
 
-        <Typography variant="h3" component="h3">
-          Login
-        </Typography>
         <Box compenet="form">
           <Grid container spacing={3}>
             <Grid item xs={12}>

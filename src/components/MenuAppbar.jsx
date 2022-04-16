@@ -23,6 +23,7 @@ export default function MenuAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  console.log(currentUser);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -42,7 +43,12 @@ export default function MenuAppBar() {
               src={Image}
             />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, "&:hover": { cursor: "pointer" } }}
+            onClick={() => navigate("/")}
+          >
             <ClaruswayBlog />
           </Typography>
 
@@ -56,7 +62,7 @@ export default function MenuAppBar() {
               color="inherit"
             >
               {currentUser ? (
-                <Avatar>{currentUser.displayName}</Avatar>
+                <Avatar>{currentUser.displayName?.charAt(0) ?? "U"}</Avatar>
               ) : (
                 <AccountCircle />
               )}
