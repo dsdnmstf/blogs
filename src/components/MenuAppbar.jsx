@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import Image from "../assets/cw.041cf5e8.jpeg";
+import Image from "../assets/cwlogo.jpeg";
 import { useSelector } from "react-redux";
 import { logOut } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
