@@ -13,10 +13,7 @@ const LoginPage = () => {
   const currentUser = useSelector((state) => state.firebase.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const successNavigate = () => {
-    navigate("/");
-    succesNote("Login succesfully performed");
-  };
+
   const [formdata, setFormdata] = useState({
     email: "",
     password: "",
@@ -25,6 +22,10 @@ const LoginPage = () => {
     state && failedNote("Please sign in!");
   }, [state]);
   useEffect(() => {
+    const successNavigate = () => {
+      navigate("/");
+      succesNote("Login succesfully performed");
+    };
     currentUser && successNavigate();
   }, [currentUser, navigate]);
 
