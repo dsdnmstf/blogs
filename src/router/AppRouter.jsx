@@ -16,7 +16,7 @@ const AppRouter = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     userStateChecker(dispatch);
-  }, []);
+  }, [dispatch]);
   return (
     <BrowserRouter>
       <MenuAppBar />

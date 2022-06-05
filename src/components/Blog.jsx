@@ -4,12 +4,11 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +33,7 @@ const Blog = ({ Image_url, content, title, user, id, like }) => {
       !like.likeUsers.includes(currentUser.email)
     ) {
       like.count = like.count + 1;
-      like.isLike = !like.isLike;
+
       like.likeUsers.push(currentUser.email);
       updateData(title, Image_url, content, user, id, like);
     } else if (
@@ -42,7 +41,7 @@ const Blog = ({ Image_url, content, title, user, id, like }) => {
       like.likeUsers.includes(currentUser.email)
     ) {
       like.count = like.count - 1;
-      like.isLike = !like.isLike;
+
       let value = currentUser.email;
       like.likeUsers = like.likeUsers.filter((item) => item !== value);
       updateData(title, Image_url, content, user, id, like);
@@ -104,8 +103,7 @@ const Blog = ({ Image_url, content, title, user, id, like }) => {
           aria-label="add to favorites"
           onClick={handleLike}
           sx={{
-            color:
-              (currentUser.email !== user) & (like.isLike == true) && "red",
+            color: like.likeUsers.includes(currentUser.email) && "red",
           }}
         >
           <FavoriteIcon />

@@ -12,7 +12,6 @@ import {
 import ShareIcon from "@mui/icons-material/Share";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Details } from "../components/Headers";
 import { deleteData, getDataForDetail } from "../firebase/firebase";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
@@ -26,7 +25,7 @@ const BlogDetail = () => {
   const { id } = useParams();
   useEffect(() => {
     getDataForDetail(id, setBlogDetail);
-  }, []);
+  }, [id, setBlogDetail]);
   const date = new Date();
   const dates = [
     date.getDate(),

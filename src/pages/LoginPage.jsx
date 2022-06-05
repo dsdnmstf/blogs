@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Login } from "../components/Headers";
-import {
-  Container,
-  Box,
-  Typography,
-  Grid,
-  TextField,
-  Button,
-} from "@mui/material";
+import { Container, Box, Grid, TextField, Button } from "@mui/material";
 import Image from "../assets/blok.7e6674a5.png";
 import { loginWithEmail, loginWithGoogle } from "../firebase/firebase";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -30,10 +23,10 @@ const LoginPage = () => {
   });
   useEffect(() => {
     state && failedNote("Please sign in!");
-  }, []);
+  }, [state]);
   useEffect(() => {
     currentUser && successNavigate();
-  }, [currentUser, navigate]);
+  }, [currentUser, navigate, successNavigate]);
 
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });

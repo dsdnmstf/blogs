@@ -2,7 +2,7 @@ import React from "react";
 import { Formik } from "formik";
 import { Register } from "../components/Headers";
 import Image from "../assets/blok.7e6674a5.png";
-import { Avatar, Box, Container, Link, Typography } from "@mui/material";
+import { Box, Container, Link, Typography } from "@mui/material";
 import RegisterForm from "../components/RegisterForm";
 import { RegisterValidationSchema } from "../components/RegisterFormValidation";
 const RegisterPage = () => {

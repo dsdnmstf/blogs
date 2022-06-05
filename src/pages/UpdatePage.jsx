@@ -1,16 +1,7 @@
-import {
-  Box,
-  Typography,
-  Container,
-  Grid,
-  TextField,
-  Button,
-} from "@mui/material";
+import { Box, Typography, TextField, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import Image from "../assets/blok.7e6674a5.png";
-import { UpdateBlog } from "../components/Headers";
 import { getDataForDetail, updateData } from "../firebase/firebase";
 import { succesNote } from "../toastify/Toastify";
 
@@ -137,7 +128,7 @@ const UpdatePage = () => {
             sx={{
               m: 1,
             }}
-            name="image"
+            name="Image_url"
             onChange={handleFormInfo}
             value={updateBlog?.Image_url ?? ""}
           />
@@ -152,7 +143,7 @@ const UpdatePage = () => {
             sx={{
               m: 1,
             }}
-            name="text"
+            name="content"
             onChange={handleFormInfo}
             value={updateBlog?.content ?? ""}
           />

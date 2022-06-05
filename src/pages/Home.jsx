@@ -1,8 +1,7 @@
-import { CleaningServices } from "@mui/icons-material";
 import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import Blog from "../components/Blog";
 import { Dashboard } from "../components/Headers";
@@ -15,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     getDataFromFirebase(setBlogs);
     userStateChecker(dispatch);
-  }, []);
+  }, [setBlogs, dispatch]);
   console.log(blogs);
   return (
     <div>
