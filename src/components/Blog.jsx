@@ -52,58 +52,51 @@ const Blog = ({ Image_url, content, title, user, id, like }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345, margin: "1rem" }}>
-      <CardMedia
-        component="img"
-        height="194"
-        image={Image_url}
-        alt={title}
-        onClick={() => navigate(`/blogdetail/${id}`)}
-      />
+    <Card
+      className="cardcont"
+      sx={{
+        width: 300,
+        m: 3,
+        boxShadow: "10px 10px 5px 0px #000000a9",
+        transition: "all 0.3s",
+        "&:hover": {
+          transform: "translateY(-1%) !important",
+          "box-shadow": " 5px 5px 15px 5px #056582",
+        },
+      }}
+    >
       <Box
         onClick={() => navigate(`/blogdetail/${id}`)}
-        sx={{
-          bgcolor: "lightgray",
-          display: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        sx={{ cursor: "pointer" }}
       >
+        <CardMedia component="img" height="140" image={Image_url} alt={title} />
         <CardHeader
+          sx={{ bgcolor: "#e7e6f5" }}
           title={title}
           subheader={dates}
-          sx={{
-            bgcolor: "lightgray",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          // subheader={`${monts[new Date().getMonth()]}
-          //   ${new Date().getDate()},
-          //   ${new Date().getFullYear()}`}
         />
-
         <CardContent
-          sx={{
-            bgcolor: "lightgray",
-            overflow: "hidden",
-            overflow: "hidden",
-            maxHeight: "1rem",
-          }}
+          sx={{ bgcolor: "#e7e6f5", overflow: "hidden", height: "3.6rem" }}
         >
-          <Typography
-            sx={{ overflow: "hidden" }}
-            component="div"
-            variant="body2"
-            color="text.secondary"
-          >
+          <Typography variant="body2" color="text.secondary">
             {content}
           </Typography>
         </CardContent>
       </Box>
-      <CardContent sx={{ display: "flex", gap: "1rem" }}>
-        <AccountCircle />
-        <Typography>{user}</Typography>
+
+      <CardContent sx={{ textAlign: "left", m: 0, p: 0 }}>
+        <Typography variant="body2" color="text.secondary">
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          {user}
+        </Typography>
       </CardContent>
 
       <CardActions disableSpacing>

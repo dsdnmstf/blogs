@@ -81,12 +81,15 @@ export const updateData = (title, Image_url, content, user, id, like) => {
     id: id,
     like: like,
   };
-  // const newPostKey = push(child(ref(db), "blogs")).key;
-  const updates = {};
-  updates["/blogs/" + id] = postData;
-  // updates["/user-blogs/" + id + "/" + newPostKey] = postData;
+  try {
+    const updates = {};
+    updates["/blogs/" + id] = postData;
+    // updates["/user-blogs/" + id + "/" + newPostKey] = postData;
 
-  return update(ref(db), updates);
+    return update(ref(db), updates);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const deleteData = (id) => {

@@ -1,4 +1,11 @@
-import { Box, Container, Grid, TextField, Button } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Container,
+  Grid,
+  TextField,
+  Button,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -34,85 +41,135 @@ const UpdatePage = () => {
   //   });
 
   const handleFormInfo = (e) => {
-    const { id, value } = e.target;
-    setUpdateBlog({ ...updateBlog, [id]: value });
+    const { name, value } = e.target;
+    setUpdateBlog({ ...updateBlog, [name]: value });
   };
 
   const handleSubmit = (e) => {
-    const { title, Image_url, content, user, id } = updateBlog;
+    const { title, Image_url, content, user, id, like } = updateBlog;
     e.preventDefault();
     // const id = Date.now();
-    updateData(title, Image_url, content, user, id);
+    updateData(title, Image_url, content, user, id, like);
     navigate("/");
     succesNote("Blog updated");
   };
   return (
-    <div>
-      <Container
-        maxWidth="xs"
+    <Box
+      className="banner"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+      }}
+    >
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        width="400px"
         sx={{
+          p: 2,
+          bgcolor: "white",
           display: "flex",
-          justifyContent: "center",
           alignItems: "center",
+          justifyContent: "center",
           flexDirection: "column",
-          gap: "2rem",
+          boxShadow: "10px 10px 5px 0px #000000a9",
+          borderRadius: "30px",
         }}
       >
         <Box
-          component="img"
-          sx={{}}
-          alt="The house from the offer."
-          src={Image}
-        />
-        <UpdateBlog />
-
-        <Box component="form" onSubmit={handleSubmit}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <TextField
-                onChange={handleFormInfo}
-                // defaultValue={updateBlog.title}
-                value={updateBlog?.title ?? ""}
-                id="title"
-                label="Title"
-                type="text"
-                autoComplete="current-password"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                onChange={handleFormInfo}
-                // defaultValue={updateBlog.Image_url}
-                value={updateBlog?.Image_url ?? ""}
-                id="Image_url"
-                label="Image URL"
-                type="url"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                onChange={handleFormInfo}
-                // defaultValue={updateBlog.content}
-                value={updateBlog?.content ?? ""}
-                id="content"
-                label="Content"
-                type="text"
-                multiline
-                rows={4}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sx={{ mt: "15px" }}>
-              <Button type="submit" variant="contained" fullWidth>
-                SUBMIT
-              </Button>
-            </Grid>
-          </Grid>
+          width="200px"
+          height="200px"
+          sx={{
+            borderRadius: "50%",
+            bgcolor: "#056582",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Box
+            width="200px"
+            component="img"
+            src={"https://blogcw.netlify.app/static/media/blok.7e6674a5.png"}
+          ></Box>
         </Box>
-      </Container>
-    </div>
+
+        <Typography
+          variant="h5"
+          component="h1"
+          sx={{ mt: 1, color: "#056582", fontWeight: "bold" }}
+        >
+          ── Update Blog ──
+        </Typography>
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            width: "100%",
+          }}
+        >
+          <TextField
+            id="outlined-basic"
+            label="Title "
+            variant="outlined"
+            size="small"
+            required
+            fullWidth
+            sx={{
+              m: 1,
+            }}
+            name="title"
+            onChange={handleFormInfo}
+            value={updateBlog?.title ?? ""}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Image URL "
+            variant="outlined"
+            required
+            fullWidth
+            size="small"
+            sx={{
+              m: 1,
+            }}
+            name="image"
+            onChange={handleFormInfo}
+            value={updateBlog?.Image_url ?? ""}
+          />
+          <TextField
+            id="outlined-multiline-static"
+            label="Content "
+            required
+            multiline
+            fullWidth
+            rows={4}
+            size="small"
+            sx={{
+              m: 1,
+            }}
+            name="text"
+            onChange={handleFormInfo}
+            value={updateBlog?.content ?? ""}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            sx={{
+              bgcolor: "#056582",
+              fontWeight: "bold",
+            }}
+          >
+            SUBMİT
+          </Button>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
