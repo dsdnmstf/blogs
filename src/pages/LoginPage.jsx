@@ -26,7 +26,7 @@ const LoginPage = () => {
   }, [state]);
   useEffect(() => {
     currentUser && successNavigate();
-  }, [currentUser, navigate, successNavigate]);
+  }, [currentUser, navigate]);
 
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });

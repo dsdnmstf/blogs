@@ -27,6 +27,7 @@ const Blog = ({ Image_url, content, title, user, id, like }) => {
   ];
   console.log(currentUser.email, user, id);
   console.log(like);
+
   const handleLike = () => {
     if (
       (currentUser.email !== user) &
@@ -78,7 +79,7 @@ const Blog = ({ Image_url, content, title, user, id, like }) => {
           sx={{ bgcolor: "#e7e6f5", overflow: "hidden", height: "3.6rem" }}
         >
           <Typography variant="body2" color="text.secondary">
-            {content}
+            {content.length > 50 ? content.slice(0, 50) + "..." : content}
           </Typography>
         </CardContent>
       </Box>
