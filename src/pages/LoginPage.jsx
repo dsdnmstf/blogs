@@ -32,7 +32,7 @@ const LoginPage = () => {
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
   };
-  // const { name, value } = e.target;
+  // const { name, value } = e.target
 
   const handleGoogleLogin = () => {
     loginWithGoogle(dispatch);
