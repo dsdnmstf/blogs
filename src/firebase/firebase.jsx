@@ -25,7 +25,7 @@ import {
 import { failedNote } from "../toastify/Toastify";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
+  apiKey: "AIzaSyCAwqtxXzg2THhpQBrc252xmqI4by4-1nc",
   authDomain: process.env.REACT_APP_authDomain,
   projectId: process.env.REACT_APP_projectId,
   storageBucket: process.env.REACT_APP_storageBucket,
