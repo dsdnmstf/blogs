@@ -24,24 +24,24 @@ import {
 } from "../redux/actions/firebasActions";
 import { failedNote } from "../toastify/Toastify";
 
+// const firebaseConfig = {
+//   apiKey: process.env.REACT_APP_API_KEY,
+//   authDomain: process.env.REACT_APP_authDomain,
+//   projectId: process.env.REACT_APP_projectId,
+//   storageBucket: process.env.REACT_APP_storageBucket,
+//   messagingSenderId: process.env.REACT_APP_messagingSenderId,
+//   appId: process.env.REACT_APP_appId,
+// };
+
 const firebaseConfig = {
   apiKey: "AIzaSyCAwqtxXzg2THhpQBrc252xmqI4by4-1nc",
-  authDomain: process.env.REACT_APP_authDomain,
-  projectId: process.env.REACT_APP_projectId,
-  storageBucket: process.env.REACT_APP_storageBucket,
-  messagingSenderId: process.env.REACT_APP_messagingSenderId,
-  appId: process.env.REACT_APP_appId,
+  authDomain: "blogs-e852e.firebaseapp.com",
+  databaseURL: "https://blogs-e852e-default-rtdb.firebaseio.com",
+  projectId: "blogs-e852e",
+  storageBucket: "blogs-e852e.appspot.com",
+  messagingSenderId: "820993512566",
+  appId: "1:820993512566:web:fb24c2b5783fa8575cbb57",
 };
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCAwqtxXzg2THhpQBrc252xmqI4by4-1nc",
-//   authDomain: "blogs-e852e.firebaseapp.com",
-//   databaseURL: "https://blogs-e852e-default-rtdb.firebaseio.com",
-//   projectId: "blogs-e852e",
-//   storageBucket: "blogs-e852e.appspot.com",
-//   messagingSenderId: "820993512566",
-//   appId: "1:820993512566:web:fb24c2b5783fa8575cbb57",
-// };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
